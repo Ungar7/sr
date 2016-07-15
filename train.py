@@ -184,7 +184,7 @@ def train(args=None):
                 os.makedirs(args.checkpoint_directory)
 
             # Saving model
-            if epoch % 10 == 0:
+            if epoch % 3 == 0:
                 model.save_weights(checkpoint_filepath, overwrite=True)
 
             # Scoring model
@@ -193,7 +193,7 @@ def train(args=None):
 
             # Save some images to see how well the model is training
 
-            if epoch % 3 == 0:
+            if epoch % 1 == 0:
                 pred_y = model.predict(val_x)
 
                 for i, (orig, real, pred) in enumerate(zip(val_x, val_y, pred_y)):
