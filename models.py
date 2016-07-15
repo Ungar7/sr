@@ -21,8 +21,8 @@ def convolutional_dnn(channels, input_patch, output_patch):
     #model.add(Convolution2D(channels, 3, 3))
 
     model.add(Flatten())
-    model.add(Dense(channels * output_patch * output_patch, activation='tanh'))
-    model.add(Dense(channels * output_patch * output_patch, activation='sigmoid'))
+    #model.add(Dense(channels * output_patch * output_patch, activation='tanh'))
+    model.add(Dense(channels * output_patch * output_patch))
 
     # let's try sgd as the paper said
     #sgd = SGD(lr=0.0001, decay=0, momentum=0.9)
