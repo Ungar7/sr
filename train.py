@@ -36,6 +36,19 @@ def get_img_filepaths(directory):
         for fname in filenames:
             yield os.path.abspath(os.path.join(dirpath, fname))
 
+def resize2(img_tensor, scale=2, i=0):
+    # Generate a half size image tensor
+    channels, max_x, max_y = img_tensor.shape
+
+    # img_tensor.shape :  (max_x, max_y, channels)
+    img_tensor = np.rollaxis(img_tensor, axis=0, start=3)
+
+    # small_img.shape : (max_x, max_y, channels)
+    small_img = np.array(toimage(img_tensor).resize(size=(int(max_x * scale),
+                                                          int(max_y * scale))))
+    x_small, y_small, args.channels = small_img.shape
+    output = np.rollaxis(small_img, axis=2) # (channels, max_x, max_y)
+    return output
 
 def resize(img_tensor, scale=0.5, i=0):
     # Generate a half size image tensor
@@ -49,6 +62,8 @@ def resize(img_tensor, scale=0.5, i=0):
                                                           int(max_y * scale))))
     x_small, y_small, args.channels = small_img.shape
     output = np.rollaxis(small_img, axis=2) # (channels, max_x, max_y)
+
+    output = resize2(output)
     return output
 
 def generate_data(img_folder, max_patches=0.001):

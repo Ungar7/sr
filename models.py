@@ -25,5 +25,5 @@ def convolutional_dnn(channels, input_patch, output_patch):
     return model
 
 def create_model():
-    return convolutional_dnn(channels=3, input_patch=16, output_patch=32)
+    return convolutional_dnn(channels=3, input_patch=32, output_patch=32)
     
