@@ -156,6 +156,7 @@ def test():
 
     print ('Done')
 
+total_iter = 0
 
 def train(args=None):
     model = create_model()
@@ -182,7 +183,8 @@ def train(args=None):
                 os.makedirs(args.checkpoint_directory)
 
             # Saving model
-            model.save_weights(checkpoint_filepath, overwrite=True)
+            if epoch % 10 == 0:
+                model.save_weights(checkpoint_filepath, overwrite=True)
 
             # Scoring model
             #val_x, val_y = next(generate_data(args.image_folder, max_patches = 0.0001))
