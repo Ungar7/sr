@@ -171,7 +171,7 @@ def train(args=None):
         for iteration, (train_x, train_y) in enumerate(generate_data(args.image_folder,
                                                                      max_patches=0.05)):
             val_x, val_y = next(generate_data(args.image_folder, max_patches = 0.001)) 
-            print (len(val_x), len(val_y))
+            print ('total epoch: {0}'.format(epoch))
             model.fit(train_x, train_y,
                       validation_data = (val_x, val_y),
                       batch_size=args.batch_size,
