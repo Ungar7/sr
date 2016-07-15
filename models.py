@@ -22,7 +22,14 @@ def convolutional_dnn(channels, input_patch, output_patch):
 
     model.add(Flatten())
     model.add(Dense(channels * output_patch * output_patch))
-    model.compile(loss='mse', optimizer=Adam())
+
+    # let's try sgd as the paper said
+    sgd = SGD(lr=0.0001, decay=0, momentum=0.9)
+    model.compile(loss='mean_squared_error', optimizer=sgd)
+
+    #model.compile(loss='mse', optimizer=Adam())
+
+    model.compile(loss='mse', optimizer=sgd)
     return model
 
 def create_model():
