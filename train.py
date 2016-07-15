@@ -191,18 +191,20 @@ def train(args=None):
             #score = model.test_on_batch(val_x, val_y)
 
             # Save some images to see how well the model is training
-            pred_y = model.predict(val_x)
 
-            for i, (orig, real, pred) in enumerate(zip(val_x, val_y, pred_y)):
-                in_patch = np.rollaxis(orig, axis=0, start=3)
-                imsave('debug/{0}_{1}_real.jpg'.format(i,checkpoint_num),
-                       vec2img(real))
-                imsave('debug/{0}_{1}_pred.jpg'.format(i, checkpoint_num),
-                       vec2img(pred))
-                imsave('debug/{0}_{1}_input.jpg'.format(i, checkpoint_num),
-                       in_patch)
-            print (i, 'images saved for debugging')
-            #print ('test loss', score[0])
+            if epoch % 3 == 0:
+                pred_y = model.predict(val_x)
+
+                for i, (orig, real, pred) in enumerate(zip(val_x, val_y, pred_y)):
+                    in_patch = np.rollaxis(orig, axis=0, start=3)
+                    imsave('debug/{0}_{1}_real.jpg'.format(i,checkpoint_num),
+                           vec2img(real))
+                    imsave('debug/{0}_{1}_pred.jpg'.format(i, checkpoint_num),
+                           vec2img(pred))
+                    imsave('debug/{0}_{1}_input.jpg'.format(i, checkpoint_num),
+                           in_patch)
+                print (i, 'images saved for debugging')
+                #print ('test loss', score[0])
 
 if __name__ == "__main__":
    args = build_parser().parse_args()
