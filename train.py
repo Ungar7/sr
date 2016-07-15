@@ -170,8 +170,8 @@ def train(args=None):
             model.save_weights(checkpoint_filepath, overwrite=True)
 
             # Scoring model
-            val_x, val_y = next(generate_data(args.image_folder, max_patches = 0.0001))
-            score = model.test_on_batch(val_x, val_y)
+            #val_x, val_y = next(generate_data(args.image_folder, max_patches = 0.0001))
+            #score = model.test_on_batch(val_x, val_y)
 
             # Save some images to see how well the model is training
             pred_y = model.predict(val_x)
@@ -185,7 +185,7 @@ def train(args=None):
                 imsave('debug/input_patch_{0}_{1}.jpg'.format(i, checkpoint_num),
                        in_patch)
             print (i, 'images saved for debugging')
-            print ('test loss', score[0])
+            #print ('test loss', score[0])
 
 if __name__ == "__main__":
    args = build_parser().parse_args()
