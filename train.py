@@ -2,7 +2,6 @@ from __future__ import print_function
 import keras
 from PIL import Image
 import os
-os.environ["THEANO_FLAGS"] = "mode=FAST_RUN,device=gpu,floatX=float32"
 import numpy as np
 from argparse import ArgumentParser
 from scipy.ndimage import imread
@@ -135,9 +134,9 @@ def test():
             print (orig.shape)
             in_patch = np.rollaxis(orig, axis=0, start=3)
             print (in_patch.shape)
-            imsave('debug/patch_{}_real.jpg'.format(index), vec2img(real))
-            imsave('debug/patch_{}_pred.jpg'.format(index), vec2img(pred))
-            imsave('debug/patch_{}_input.jpg'.format(index), in_patch)
+            imsave('debug/real_patch_{}.jpg'.format(index), vec2img(real))
+            imsave('debug/pred_patch_{}.jpg'.format(index), vec2img(pred))
+            imsave('debug/input_patch_{}.jpg'.format(index), in_patch)
 
     print ('Done')
 
@@ -178,14 +177,14 @@ def train(args=None):
 
             for i, (orig, real, pred) in enumerate(zip(val_x, val_y, pred_y)):
                 in_patch = np.rollaxis(orig, axis=0, start=3)
-                imsave('debug/patch_{0}_{1}_real.jpg'.format(i,checkpoint_num),
+                imsave('debug/real_patch_{0}_{1}.jpg'.format(i,checkpoint_num),
                        vec2img(real))
-                imsave('debug/patch_{0}_{1}_pred.jpg'.format(i, checkpoint_num),
+                imsave('debug/pred_patch_{0}_{1}.jpg'.format(i, checkpoint_num),
                        vec2img(pred))
-                imsave('debug/patch_{0}_{1}_input.jpg'.format(i, checkpoint_num),
+                imsave('debug/input_patch_{0}_{1}.jpg'.format(i, checkpoint_num),
                        in_patch)
             print (i, 'images saved for debugging')
-            #print ('test loss', score[0])
+            print ('test loss', score[0])
 
 if __name__ == "__main__":
    args = build_parser().parse_args()
