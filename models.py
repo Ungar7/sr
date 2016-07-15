@@ -7,20 +7,16 @@ from keras.optimizers import SGD, Adadelta, Adagrad, Adam, Adamax
 def convolutional_dnn(channels, input_patch, output_patch):
     ''' Builds a CNN model for super-resolution'''
     model = Sequential()
-    model.add(Convolution2D(32, 3, 3, border_mode='same',
-                            input_shape=(channels, input_patch, input_patch),
-                            activation='relu'))
+    model.add(ZeroPadding2D((1, 1), input_shape=(channels, input_patch, input_patch)))
+    model.add(Convolution2D(32, 3, 3, border_mode='same', activation='relu'))
+
     model.add(ZeroPadding2D((1, 1)))
-    #model.add(Activation('relu'))
     model.add(Convolution2D(32, 3, 3, activation='relu'))
+
     model.add(ZeroPadding2D((1, 1)))
-    #model.add(Activation('relu'))
-    #model.add(Dropout(0.5))
-    #model.add(Convolution2D(64, 3, 3, activation='relu'))
-    #model.add(Activation('relu'))
-    #model.add(Dropout(0.5))
     model.add(Convolution2D(32, 3, 3, activation='relu'))
-    model.add(ZeroPadding2D((1, 1)))
+
+    #model.add(ZeroPadding2D((1, 1)))
     #model.add(Activation('relu'))
     #model.add(Convolution2D(channels, 3, 3))
     model.add(Flatten())
