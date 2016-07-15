@@ -156,11 +156,12 @@ def test():
 
     print ('Done')
 
-total_iter = 0
+
 
 def train(args=None):
     model = create_model()
     print ('Created model...')
+    iterations = 0
     total_iterations = 0
     sum_iterations = 0
     checkpoint_num = 0
@@ -171,12 +172,12 @@ def train(args=None):
         for iteration, (train_x, train_y) in enumerate(generate_data(args.image_folder,
                                                                      max_patches=0.05)):
             val_x, val_y = next(generate_data(args.image_folder, max_patches = 0.001)) 
-            print ('total epoch: {0}'.format(epoch))
+            print ('epoch: {0}\titeration: {1}'.format(epoch, iterations))
             model.fit(train_x, train_y,
                       validation_data = (val_x, val_y),
                       batch_size=args.batch_size,
                       nb_epoch=1, show_accuracy=True)
-
+            iterations += len(train_x)
             checkpoint_filepath = os.path.join(args.checkpoint_directory,
                                                '{}_model.h5py'.format(total_iterations))
             if not os.path.exists(args.checkpoint_directory):
