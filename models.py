@@ -29,7 +29,6 @@ def convolutional_dnn(channels, input_patch, output_patch):
 
     #model.compile(loss='mse', optimizer=Adam())
 
-    model.compile(loss='mse', optimizer=sgd)
     return model
 
 def create_model():
