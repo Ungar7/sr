@@ -2,6 +2,7 @@ from __future__ import print_function
 import keras
 from PIL import Image
 import os
+os.environ["THEANO_FLAGS"] = "mode=FAST_RUN,device=gpu,floatX=float32"
 import numpy as np
 from argparse import ArgumentParser
 from scipy.ndimage import imread
