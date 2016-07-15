@@ -178,11 +178,11 @@ def train(args=None):
 
             for i, (orig, real, pred) in enumerate(zip(val_x, val_y, pred_y)):
                 in_patch = np.rollaxis(orig, axis=0, start=3)
-                imsave('debug/real_patch_{0}_{1}.jpg'.format(i,checkpoint_num),
+                imsave('debug/{0}_{1}_real.jpg'.format(i,checkpoint_num),
                        vec2img(real))
-                imsave('debug/pred_patch_{0}_{1}.jpg'.format(i, checkpoint_num),
+                imsave('debug/{0}_{1}_pred.jpg'.format(i, checkpoint_num),
                        vec2img(pred))
-                imsave('debug/input_patch_{0}_{1}.jpg'.format(i, checkpoint_num),
+                imsave('debug/{0}_{1}_input.jpg'.format(i, checkpoint_num),
                        in_patch)
             print (i, 'images saved for debugging')
             #print ('test loss', score[0])
